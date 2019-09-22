@@ -1,2 +1,2 @@
-# OnyxDropper
-Simple dropper made in C# using a PHP webpanel
+# Onyx
+Simple dropper with web based interface
