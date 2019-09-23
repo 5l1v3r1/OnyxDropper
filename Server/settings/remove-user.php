@@ -1,8 +1,9 @@
 <?php
 session_start();
 
-include './database/db-conn.php';
-include './scripts/removeusers.php';
+include('../database/db-config.php');
+include '../database/db-conn.php';
+include '../scripts/removeusers.php';
 
 if (!isset($_SESSION['user'])) {
     echo ("not set.");
@@ -44,12 +45,12 @@ $userTable = GetAllUsers($dbconn);
 <html lang="en">
 
 <head>
-    <?php include './includes/head.php';?>
+    <?php include '../includes/head.php';?>
 </head>
 
 <body>
     <header>
-        <?php include './includes/header.php';?>
+        <?php include '../includes/header.php';?>
     </header>
     <main>
         <div class="container">
@@ -85,7 +86,7 @@ $userTable = GetAllUsers($dbconn);
                 ?>
                 <div class="columns">
                     <div class="column is-3">
-                        <?php include('./includes/settings-menu.php') ?>
+                        <?php include('../includes/settings-menu.php') ?>
                     </div>
                     <div class="column">
                         <h1 class="title">Remove users</h1>   

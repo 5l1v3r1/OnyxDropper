@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-include './database/db-conn.php';
+include('../database/db-config.php');
+include '../database/db-conn.php';
 
 if (!isset($_SESSION['user'])) {    
     header('location: ' . "/login.php");
@@ -41,12 +42,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 <html lang="en">
 
 <head>
-    <?php include './includes/head.php';?>
+    <?php include '../includes/head.php';?>
 </head>
 
 <body>
     <header>
-        <?php include './includes/header.php';?>
+        <?php include '../includes/header.php';?>
     </header>
     <main>    
         <div class="container">        
@@ -65,7 +66,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
                 ?>
                 <div class="columns">
                     <div class="column is-3">                        
-                        <?php include('./includes/settings-menu.php') ?>
+                        <?php include('../includes/settings-menu.php') ?>
                     </div>
                     <div class="column">                                        
                         <div class="columns is-centered">                        
