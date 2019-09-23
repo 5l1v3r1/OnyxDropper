@@ -9,7 +9,8 @@ if(isset($_SESSION['user']))
 if($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     // Login the user
-
+    
+    include('./database/db-config.php');
     include('./database/db-conn.php');
     $username = htmlspecialchars($_POST['username']);    
 

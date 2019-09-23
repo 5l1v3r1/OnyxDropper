@@ -17,11 +17,20 @@ function GetAllPayloads($conn)
     return null;
 }
 
-function UploadPayload($conn, $base64, $filename)
+function UploadPayload($conn, $base64, $filename,$fileextension, $name)
 {
-    $sql = "INSERT INTO `payloads` (`Name`, `PayloadBytes`) VALUES ('$filename','$base64')";
+    $sql = "INSERT INTO `payloads` (`FileName`,`Extension`,`Name`, `PayloadBytes`) VALUES ('$filename','$fileextension','$name','$base64')";
     $stmt = $conn->prepare($sql);    
     $stmt->execute();
+}
+
+function RemovePayload($conn, $ids)
+{
+    foreach ($ids as $id => $value) {
+        $sql = "DELETE FROM `payloads` WHERE `payloads`.`Id` =" .$value . ";";        
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+    }
 }
 
 ?>

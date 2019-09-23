@@ -1,8 +1,10 @@
 <?php
 session_start();
 
+include('./database/db-config.php');
 include('./database/db-conn.php');
 include('./scripts/getclients.php');
+include('./scripts/payloads.php');
 
 if(!isset($_SESSION['user']))
 {        
@@ -10,6 +12,7 @@ if(!isset($_SESSION['user']))
     die();
 }
 
+$payloadTable = GetAllPayloads($dbconn);
 $onlineClientTable = GetOnlineClients($dbconn);
 $clienttable = GetAllClients($dbconn);
 
@@ -54,8 +57,7 @@ $clienttable = GetAllClients($dbconn);
                                     <select onchange="SelectCommand()" name="command" id="selectcommand">
                                         <option value="" disabled selected> Select command</option>
                                         <option value="run">Run</option>
-                                        <option value="uninstall">Uninstall</option>
-                                        
+                                        <option value="uninstall">Uninstall</option>                                        
                                     </select>
                                 </div>
                             </div>
@@ -64,9 +66,12 @@ $clienttable = GetAllClients($dbconn);
                                 <div class="select is-rounded">
                                     <select name="payload" id="">
                                         <option value="" disabled selected> Select payload</option>
-                                        <option value="OnyxDropper">OnyxDropper</option>
-                                        <option value="OnyxLocker">OnyxLocker</option>
-                                        <option value="OnyxBot">OnyxBot</option>
+                                        <?php
+                                            foreach ($payloadTable as $key => $table) 
+                                            {                                    
+                                                echo("<option value=\"".$table['Id']."\">".$table['Name']."</option>");
+                                            }
+                                        ?>
                                     </select>
                                 </div>
                             </div>
