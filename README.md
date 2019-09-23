@@ -1,4 +1,4 @@
-# Onyx
+# OnyxDropper
 Simple dropper with web based interface
 
 ## What is OnyxDropper?
