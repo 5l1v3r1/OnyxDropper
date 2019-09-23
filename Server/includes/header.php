@@ -25,26 +25,26 @@
                         Settings
                     </p>
                     <div class="navbar-dropdown">                        
-                        <a class="navbar-item" href="/change-password.php">
+                        <a class="navbar-item" href="/settings/change-password.php">
                             Change password
                         </a>
-                        <a class="navbar-item" href="/add-user.php">
+                        <a class="navbar-item" href="/settings/add-user.php">
                             Add new user
                         </a>
-                        <a class="navbar-item" href="/remove-user.php">
+                        <a class="navbar-item" href="/settings/remove-user.php">
                             Remove users
                         </a>                        
                         <br>
-                        <a class="navbar-item" href="/add-payload.php">
+                        <a class="navbar-item" href="/settings/add-payload.php">
                             Add payload
                         </a>    
-                        <a class="navbar-item" href="/remove-payload.php">
+                        <a class="navbar-item" href="/settings/remove-payload.php">
                             Remove payload
                         </a>                       
                     </div>
                 </div>                
                 <div class="navbar-item">
-                    <a class="navbar-item" href="./scripts/logout.php">
+                    <a class="navbar-item" href="../scripts/logout.php">
                         Logout
                     </a>
                 </div>
