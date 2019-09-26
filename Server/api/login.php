@@ -23,7 +23,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     if(!isset($_POST['mac']))
     {
-        $msg = array('Error' => 'No data was sent');
+        $msg = array('error' => 'No data was sent');
         echo(json_encode($msg));
         die();
     }
@@ -31,16 +31,20 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
     $macaddr = $_POST['mac'];
     if(CheckIfUserExists($macaddr, $dbconn))
     {
-        $msg = array('Message' => 'succes');
+        $msg = array('message' => 'succes');
         echo(json_encode($msg));
         die();
     }
     else
     {
-        $msg = array('Message' => 'fail');
+        $msg = array('message' => 'fail');
         echo(json_encode($msg));
         die();
     }    
+
+    $msg = array('message' => 'error');
+    echo(json_encode($msg));
+    die();
 }
 else
 {

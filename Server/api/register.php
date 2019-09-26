@@ -26,20 +26,20 @@ if(isset($_POST['cpu']) && isset($_POST['ram']) && isset($_POST['ip']) && isset(
 
     if(InsertClient($dbconn, $cpu, $ram, $ip, $mac, $av, null))
     {
-        $msg = array('Message' => 'succes');
+        $msg = array('message' => 'succes');
         echo(json_encode($msg));
         die();
     }
     else
     {
-        $msg = array('Message' => 'fail');
+        $msg = array('message' => 'fail');
         echo(json_encode($msg));
         die();
     }
 }
 else
 {
-    $msg = array('Message' => 'fail');
+    $msg = array('message' => 'fail');
     echo(json_encode($msg));
     die();
 }
