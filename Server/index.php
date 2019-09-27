@@ -107,6 +107,7 @@ $clienttable = GetAllClients($dbconn);
                                     echo("<td>". $table['Ram'] ."</td>");
                                     echo("<td>". $table['LastSeen'] ."</td>");
                                     echo("<td>". $table['AntiVirus'] ."</td>");
+                                    echo("<td>". "WIP" ."</td>");
                                     echo("<td> <input type=\"checkbox\" name=\"check[]\" value=". $table['Id'] ."> </td>");
                                     echo("</tr>");
                                 }
@@ -141,7 +142,7 @@ $clienttable = GetAllClients($dbconn);
                                     echo("<td>". $table['Ram'] ."</td>");
                                     echo("<td>". $table['LastSeen'] ."</td>");                                    
                                     echo("<td>". $table['AntiVirus'] ."</td>");
-                                    echo("<td>". "run" ."</td>");
+                                    echo("<td>". "WIP" ."</td>");
                                     echo("<td> <input type=\"checkbox\" name=\"check[]\" value=". $table['Id'] ."> </td>");
                                     echo("</tr>");
                                 }
