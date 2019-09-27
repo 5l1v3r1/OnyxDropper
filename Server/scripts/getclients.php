@@ -1,6 +1,6 @@
 <?php
 
-// This script contains functions used in /index.php
+// This file contains functions used in /index.php
 
 function GetOnlineClients($conn)
 {
@@ -27,8 +27,8 @@ function GetAllClients($conn)
     $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
     if($result)
     {
-        $clienttable = $stmt->fetchAll();    
-        return $clienttable;
+        $clientTable = $stmt->fetchAll();    
+        return $clientTable;     
     }
 
     return null;
