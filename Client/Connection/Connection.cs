@@ -8,6 +8,10 @@ namespace DropperClient.Connection
         private readonly HttpClient _httpClient;
         public string _addres { get; private set; }
 
+        /// <summary>
+        /// Provides functions to check the connection to the webserver
+        /// </summary>
+        /// <param name="baseAddres">Adress to connect to, for example http://localhost </param>
         public ServerConnection(string baseAddres)
         {
             _httpClient = new HttpClient();
@@ -19,6 +23,10 @@ namespace DropperClient.Connection
             _httpClient.Dispose();
         }
 
+        /// <summary>
+        /// Pings the webserver to see if a connection is possible
+        /// </summary>
+        /// <returns></returns>
         public bool CanConnect()
         {
             try
@@ -33,6 +41,10 @@ namespace DropperClient.Connection
             return true;
         }
 
+        /// <summary>
+        /// Returns the HttpClient instance
+        /// </summary>
+        /// <returns></returns>
         public HttpClient GetConnection()
         {
             return _httpClient;

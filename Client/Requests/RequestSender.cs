@@ -12,6 +12,11 @@ namespace DropperClient.Requests
             _connection = connection;
         }
 
+        /// <summary>
+        /// Sends the request to the webserver and returns a response as string
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         public string SendRequest(IRequest request)
         {
             var httpClient = _connection.GetConnection();

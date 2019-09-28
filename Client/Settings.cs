@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DropperClient
 {
+    /// <summary>
+    /// Change the variables in this class to your settings.
+    /// </summary>
     internal static class Settings
     {
         public static readonly string hostname = "http://localhost";

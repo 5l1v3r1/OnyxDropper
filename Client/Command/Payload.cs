@@ -9,6 +9,10 @@ namespace DropperClient.Command
 
         private string FileName { get; set; }
 
+        /// <summary>
+        /// Drops the Payload to the disk
+        /// </summary>
+        /// <returns></returns>
         public string Drop()
         {
             try
@@ -37,6 +41,11 @@ namespace DropperClient.Command
             }
         }
 
+        /// <summary>
+        /// Sets the Payload
+        /// </summary>
+        /// <param name="base64string">String to decode the bytes from</param>
+        /// <returns></returns>
         public bool SetPayload(string base64string)
         {
             try
@@ -50,6 +59,10 @@ namespace DropperClient.Command
             }
         }
 
+        /// <summary>
+        /// Sets the payload's filename
+        /// </summary>
+        /// <param name="name"></param>
         public void SetFileName(string name)
         {
             FileName = name;

