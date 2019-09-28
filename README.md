@@ -17,7 +17,13 @@ OnyxDropper is a simple webbased dropper, the aim is to provide a stable connect
 * Go to yourwebsite.com/setup.php
 * Login as root:root after going back to yourwebsite.com/login.php
 
-For a more detailed description look in the /client or /server folder
+## Client Setup
+* Download the github repo and extract it to whereever
+* In the folder, go to /server and open the solution file
+* Change the information in the settings.cs to your hostname / install location etcetera
+* Set build mode to release
+* Build the executable
+* Make sure to test the application in a sandboxed enviroment, a virtual machine or whatever.
 
 
 ## Warning
