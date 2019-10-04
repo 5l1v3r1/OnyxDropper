@@ -3,7 +3,7 @@ using System.Net.Http;
 
 namespace DropperClient.Connection
 {
-    internal class ServerConnection : IConnection, IDisposable
+    internal class ServerConnection : IDisposable
     {
         private readonly HttpClient _httpClient;
         public string _addres { get; private set; }

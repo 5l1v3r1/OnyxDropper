@@ -1,24 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DropperClient
+﻿namespace DropperClient
 {
     /// <summary>
     /// Change the variables in this class to your settings.
     /// </summary>
-    internal static class Settings
+    internal class Settings
     {
-        public static readonly string hostname = "http://localhost";
+        public readonly string hostname = "http://localhost";
 
         // InstallLocation 0: AppData
         // InstallLocation 1: Documents
-        public static readonly int InstallLocation = 0;
+        public readonly int InstallLocation = 0;
 
-        public static readonly bool Install = true;
-        public static readonly bool Hide = true;
-        public static readonly int TimeOut = 120000;
+        public readonly bool Install = true;
+        public readonly bool Hide = true;
+        public readonly int TimeOut = 120000;
     }
 }
